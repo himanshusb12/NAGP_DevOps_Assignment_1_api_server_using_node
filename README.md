@@ -3,11 +3,13 @@
 # node-app
 
 - Install dependencies:
-     $ npm install
+    * npm install
+
 
 - Run the app:
-     $ npm start
-     $ Go to http://localhost:7100
+     * npm start
+     * Go to http://localhost:7100
+     
 
 - Test the app:
-    $ npm test
+    * npm test
