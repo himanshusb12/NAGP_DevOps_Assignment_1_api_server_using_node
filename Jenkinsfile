@@ -87,7 +87,7 @@ pipeline {
         stage("Docker deployment") {
             steps {
                 echo 'Stopping the already running containers, if found'
-                bat "for /F \"tokens=*\" %%n IN ('docker ps -a -q -f \"name=c-${username}-master\"') DO docker rm -f %%n"
+                bat "docker rm -f c-${username}-master"
 
                 echo 'Starting the api container'
                 bat "docker run --name c-${username}-master -p ${appPort}:${dockerPort} -d ${dockerRegistry}:${BUILD_NUMBER}"
