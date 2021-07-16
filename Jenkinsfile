@@ -55,7 +55,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                     withSonarQubeEnv('Test_Sonar') {
-                    bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=node-app -Dsonar.projectName=node-app -Dsonar.language=js -Dsonar.sourceEncoding=UTF-8 -Dsonar.exclusions=tests/** -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info"
+                    bat "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=sonar-himanshubungla -Dsonar.projectName=sonar-himanshubungla -Dsonar.language=js -Dsonar.sourceEncoding=UTF-8 -Dsonar.exclusions=tests/** -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info"
                 } 
             }
         }
@@ -87,7 +87,7 @@ pipeline {
         stage("Docker deployment") {
             steps {
                 echo 'Stopping the already running containers, if found'
-                bat "for /F \"tokens=*\" %%n IN ('docker ps -a -q -f \"name=c-himanshubungla-master\"') DO docker rm -f %%n"
+                bat "for /F \"tokens=*\" %%n IN ('docker ps -a -q -f \"name=c-${username}-master\"') DO docker rm -f %%n"
 
                 echo 'Starting the api container'
                 bat "docker run --name c-${username}-master -p ${appPort}:${dockerPort} -d ${dockerRegistry}:${BUILD_NUMBER}"
